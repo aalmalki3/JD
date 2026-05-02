@@ -2,196 +2,237 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محقق الوصف الوظيفي | Job Analysis Enquirer</title>
+    <title>مختبر هندسة الوظائف الاحترافي | Professional Job Architect</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #f1f5f9; }
-        .step-content { display: none; }
-        .step-content.active { display: block; }
-        .hint-box { border-right: 4px solid #3b82f6; background-color: #eff6ff; }
-        @media print { .no-print { display: none !important; } .print-area { display: block !important; background: white; p: 0; } }
+        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; }
+        .wizard-step { display: none; }
+        .wizard-step.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .coach-tip { border-right: 4px solid #10b981; background-color: #f0fdf4; }
+        .error-glow { border: 1px solid #ef4444 !important; box-shadow: 0 0 5px #fca5a5; }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-12">
 
-    <div class="max-w-4xl mx-auto">
-        <!-- Wizard Header -->
-        <div class="no-print mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-            <h1 class="text-2xl font-bold text-slate-800">مختبر تحليل الوظائف (v2.0)</h1>
-            <p class="text-slate-500 text-sm mt-1">هذه الأداة لن تكتب نيابة عنك؛ بل ستساعدك لتفكر كخبير موارد بشرية.</p>
-            
-            <div class="flex justify-between mt-8 relative">
-                <div class="absolute inset-0 top-1/2 h-0.5 bg-slate-100 -z-10"></div>
-                <div id="step-i-1" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold">1</div>
-                <div id="step-i-2" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">2</div>
-                <div id="step-i-3" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">3</div>
-                <div id="step-i-4" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">4</div>
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-slate-200">
+        <!-- Progress Bar -->
+        <div class="bg-slate-900 p-6 text-white flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold">مختبر هندسة الوظائف (v2.1)</h1>
+                <p class="text-slate-400 text-xs">منهجية التحليل الوظيفي المبني على الممارسات</p>
             </div>
+            <div id="step-counter" class="text-sm font-mono bg-slate-800 px-3 py-1 rounded-full text-blue-400">الخطوة 1 من 4</div>
         </div>
 
-        <!-- Step 1: Definition -->
-        <section id="step-1" class="step-content active bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h2 class="text-xl font-bold mb-4">1. تعريف الهوية الوظيفية</h2>
-            <div class="hint-box p-4 mb-6">
-                <p class="text-sm text-blue-800"><strong>لماذا نبدأ هنا؟</strong> وفق معايير CIPD، يجب فهم "الغرض الوجودي" للوظيفة قبل كتابة مهامها لتجنب التكرار.</p>
-            </div>
-            
-            <div class="space-y-4">
-                <div>
-                    <label class="block font-bold text-slate-700 mb-1">المسمى الوظيفي المقترح:</label>
-                    <input type="text" id="input-title" placeholder="مثلاً: أخصائي سعادة الموظفين" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+        <div class="p-8">
+            <!-- Step 1: Logic of Purpose -->
+            <div id="step-1" class="wizard-step active">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">أولاً: صياغة الغرض الوجودي</h2>
+                <div class="coach-tip p-4 mb-6 rounded-lg text-sm text-green-800">
+                    <strong>نصيحة الخبير:</strong> لا تكتب مسمى الوظيفة هنا. اسأل نفسك: "لو اختفت هذه الوظيفة غداً، ما هو النقص الجوهري الذي سيحدث في الشركة؟"
                 </div>
-                <div>
-                    <label class="block font-bold text-slate-700 mb-1">ما هي النتيجة النهائية التي تتوقعها الشركة من هذا الموظف؟</label>
-                    <textarea id="input-purpose" rows="3" placeholder="تجنب المسميات، ركز على الأثر..." class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <div class="space-y-4">
+                    <input type="text" id="job-title" placeholder="المسمى الوظيفي المستهدف..." class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                    <textarea id="job-purpose" rows="4" placeholder="اكتب الغرض الوجودي هنا..." class="w-full p-4 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                </div>
+                <div class="mt-8 flex justify-end">
+                    <button onclick="validateStep1()" class="bg-blue-600 text-white px-10 py-3 rounded-xl hover:bg-blue-700 transition font-bold">بدء التحليل الفعلي</button>
                 </div>
             </div>
-            <div class="mt-8 flex justify-end">
-                <button onclick="nextStep(2)" class="bg-blue-600 text-white px-8 py-2 rounded-xl hover:bg-blue-700 transition">الخطوة التالية</button>
-            </div>
-        </section>
 
-        <!-- Step 2: Tasks Analysis -->
-        <section id="step-2" class="step-content bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h2 class="text-xl font-bold mb-4">2. تحليل الممارسات والمسؤوليات</h2>
-            <div class="hint-box p-4 mb-6 text-sm text-blue-800">
-                <strong>تلميح SHRM:</strong> المهمة هي "فعل" (Action) والمسؤولية هي "التزام" (Obligation). حاول كتابة 3 مهام تبدأ بأفعال مضارعة.
-            </div>
-            <div id="tasks-container" class="space-y-3">
-                <input type="text" class="task-input w-full p-3 border rounded-xl" placeholder="المهمة 1...">
-                <input type="text" class="task-input w-full p-3 border rounded-xl" placeholder="المهمة 2...">
-                <input type="text" class="task-input w-full p-3 border rounded-xl" placeholder="المهمة 3...">
-            </div>
-            <div class="mt-8 flex justify-between">
-                <button onclick="prevStep(1)" class="text-slate-500 hover:text-slate-800">السابق</button>
-                <button onclick="nextStep(3)" class="bg-blue-600 text-white px-8 py-2 rounded-xl hover:bg-blue-700">الخطوة التالية</button>
-            </div>
-        </section>
-
-        <!-- Step 3: Competencies -->
-        <section id="step-3" class="step-content bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <h2 class="text-xl font-bold mb-4">3. الجدارات السلوكية (نظام المستويات)</h2>
-            <div class="hint-box p-4 mb-6 text-sm text-blue-800">
-                الممارس المحترف يميز بين مستويات الجدارة. اختر المستوى الذي يتطلبه هذا الدور تحديداً.
-            </div>
-            
-            <div class="space-y-6">
-                <div class="p-4 border rounded-xl bg-slate-50">
-                    <p class="font-bold mb-2">جدارة "حل المشكلات"</p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <label class="flex flex-col p-3 border bg-white rounded-lg cursor-pointer hover:border-blue-500 transition">
-                            <input type="radio" name="comp-1" value="مستوى أساسي: يحل المشكلات الروتينية بإشراف" class="mb-2">
-                            <span class="text-xs">أساسي</span>
-                        </label>
-                        <label class="flex flex-col p-3 border bg-white rounded-lg cursor-pointer hover:border-blue-500">
-                            <input type="radio" name="comp-1" value="مستوى متوسط: يحل مشكلات العمل اليومية باستقلالية" class="mb-2">
-                            <span class="text-xs">متوسط</span>
-                        </label>
-                        <label class="flex flex-col p-3 border bg-white rounded-lg cursor-pointer hover:border-blue-500">
-                            <input type="radio" name="comp-1" value="مستوى خبير: يضع استراتيجيات لمنع المشكلات قبل وقوعها" class="mb-2">
-                            <span class="text-xs">خبير</span>
-                        </label>
+            <!-- Step 2: Task Engineering (The "No Silver Spoon" zone) -->
+            <div id="step-2" class="wizard-step">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">ثانياً: هندسة المسؤوليات</h2>
+                <p class="text-slate-500 mb-6">المسؤولية الاحترافية = فعل إنجاز + موضوع العمل + النتيجة المتوقعة.</p>
+                
+                <div class="space-y-4" id="tasks-list">
+                    <div class="task-entry p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <label class="block text-xs font-bold text-slate-500 mb-2 uppercase">مسؤولية 1:</label>
+                        <input type="text" class="task-input w-full p-3 border rounded-lg mb-2" placeholder="مثال: مراجعة (فعل) العقود القانونية (موضوع) لضمان حماية حقوق الشركة (نتيجة)">
+                        <p class="text-[10px] text-red-500 hidden task-error">العبارة ضعيفة! أضف "الموضوع" و"النتيجة المتوقعة".</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="mt-8 flex justify-between">
-                <button onclick="prevStep(2)" class="text-slate-500 hover:text-slate-800">السابق</button>
-                <button onclick="generateFinal()" class="bg-blue-600 text-white px-8 py-2 rounded-xl hover:bg-blue-700">مراجعة وتحليل المخرج</button>
-            </div>
-        </section>
-
-        <!-- Step 4: Audit & Final Output -->
-        <section id="step-4" class="step-content bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <div class="no-print">
-                <h2 class="text-xl font-bold mb-4">4. مراجعة الجودة والتدقيق المهني</h2>
-                <div id="audit-feedback" class="p-4 rounded-xl mb-6 border">
-                    <!-- Feedback Logic injected here -->
-                </div>
-            </div>
-
-            <div id="final-document" class="print-area p-8 border-2 border-slate-100 rounded-xl bg-white">
-                <div class="border-b-4 border-blue-600 pb-4 mb-6">
-                    <h3 id="res-title" class="text-2xl font-bold text-slate-800 uppercase"></h3>
-                    <p class="text-blue-600 font-bold">مسودة وصف وظيفي تحليلية</p>
-                </div>
                 
-                <div class="mb-6">
-                    <h4 class="font-bold text-slate-700 underline mb-2">الغرض الوجودي من الوظيفة:</h4>
-                    <p id="res-purpose" class="text-slate-600 italic"></p>
-                </div>
+                <button onclick="addTask()" class="mt-4 text-blue-600 text-sm font-bold">+ إضافة مسؤولية أخرى</button>
 
-                <div class="mb-6">
-                    <h4 class="font-bold text-slate-700 underline mb-2">المسؤوليات المحللة:</h4>
-                    <ul id="res-tasks" class="list-disc pr-6 text-slate-600 space-y-1"></ul>
-                </div>
-
-                <div class="mb-6">
-                    <h4 class="font-bold text-slate-700 underline mb-2">مستوى الجدارة المطلوب:</h4>
-                    <p id="res-comp" class="text-slate-600"></p>
+                <div class="mt-10 flex justify-between">
+                    <button onclick="goToStep(1)" class="text-slate-400 font-bold">السابق</button>
+                    <button onclick="validateStep2()" class="bg-blue-600 text-white px-10 py-3 rounded-xl hover:bg-blue-700 transition font-bold">تحليل الجدارات المستنبطة</button>
                 </div>
             </div>
 
-            <div class="mt-8 flex justify-between no-print">
-                <button onclick="prevStep(3)" class="text-slate-500 hover:text-slate-800">تعديل التحليل</button>
-                <button onclick="window.print()" class="bg-green-600 text-white px-8 py-2 rounded-xl hover:bg-green-700">اعتماد وطباعة</button>
+            <!-- Step 3: Competency Extraction -->
+            <div id="step-3" class="wizard-step">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">ثالثاً: استنباط الجدارات</h2>
+                <p class="text-slate-500 mb-6">بناءً على المسؤوليات التي كتبتَها، ما هي "الجدارة" (سلوك/معرفة) اللازمة لتنفيذها باحترافية؟</p>
+                
+                <div id="comp-extraction-zone" class="space-y-6">
+                    <!-- Dynamic Rows will appear here -->
+                </div>
+
+                <div class="mt-10 flex justify-between">
+                    <button onclick="goToStep(2)" class="text-slate-400 font-bold">السابق</button>
+                    <button onclick="generateAudit()" class="bg-emerald-600 text-white px-10 py-3 rounded-xl hover:bg-emerald-700 transition font-bold">توليد تقرير التدقيق المهني</button>
+                </div>
             </div>
-        </section>
+
+            <!-- Step 4: Audit & Final Board -->
+            <div id="step-4" class="wizard-step">
+                <div id="audit-report" class="mb-10 p-6 rounded-2xl border-2 border-dashed">
+                    <!-- Coach Feedback -->
+                </div>
+
+                <div id="final-card" class="bg-white border-2 border-slate-900 p-8 rounded-none shadow-none">
+                    <div class="flex justify-between border-b-2 border-slate-900 pb-4 mb-6">
+                        <h3 id="out-title" class="text-3xl font-black text-slate-900 uppercase"></h3>
+                        <span class="text-xs border border-slate-900 px-2 py-1 h-fit">CONFIDENTIAL / HR-ONLY</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="md:col-span-2">
+                            <h4 class="font-bold bg-slate-900 text-white px-2 mb-2 w-fit">الغرض الاستراتيجي</h4>
+                            <p id="out-purpose" class="text-slate-700 leading-relaxed mb-6"></p>
+                            
+                            <h4 class="font-bold bg-slate-900 text-white px-2 mb-2 w-fit">المسؤوليات المحققة</h4>
+                            <ul id="out-tasks" class="list-decimal pr-6 text-slate-700 space-y-2"></ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 border-l-2 border-slate-900">
+                            <h4 class="font-bold mb-4">قاموس الجدارات للدور:</h4>
+                            <div id="out-comps" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex justify-between items-center no-print">
+                    <button onclick="goToStep(3)" class="text-slate-400 font-bold underline">إعادة التحليل</button>
+                    <button onclick="window.print()" class="bg-slate-900 text-white px-10 py-4 rounded-full font-bold">طباعة بطاقة الوصف النهائي</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function nextStep(step) {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            document.getElementById('step-' + step).classList.add('active');
-            updateIndicators(step);
+        let currentStep = 1;
+
+        function goToStep(s) {
+            document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step-' + s).classList.add('active');
+            document.getElementById('step-counter').innerText = `الخطوة ${s} من 4`;
+            currentStep = s;
         }
 
-        function prevStep(step) {
-            nextStep(step);
+        function addTask() {
+            const container = document.getElementById('tasks-list');
+            const div = document.createElement('div');
+            div.className = "task-entry p-4 bg-slate-50 rounded-xl border border-slate-200";
+            div.innerHTML = `
+                <label class="block text-xs font-bold text-slate-500 mb-2 uppercase">مسؤولية إضافية:</label>
+                <input type="text" class="task-input w-full p-3 border rounded-lg mb-2" placeholder="اكتب مسؤولية احترافية كاملة...">
+                <p class="text-[10px] text-red-500 hidden task-error">العبارة ضعيفة! أضف "الموضوع" و"النتيجة المتوقعة".</p>
+            `;
+            container.appendChild(div);
         }
 
-        function updateIndicators(step) {
-            for(let i=1; i<=4; i++) {
-                const el = document.getElementById('step-i-' + i);
-                if(i < step) { el.classList.replace('bg-slate-200', 'bg-green-500'); el.innerText = '✓'; }
-                else if(i === step) { el.classList.add('bg-blue-600', 'text-white'); el.innerText = i; }
-                else { el.classList.add('bg-slate-200'); el.innerText = i; }
+        function validateStep1() {
+            const title = document.getElementById('job-title').value;
+            const purpose = document.getElementById('job-purpose').value;
+            if(title.length > 3 && purpose.length > 20) goToStep(2);
+            else alert("يرجى كتابة عنوان واضح وغرض لا يقل عن 20 حرفاً لضمان الجدية في التحليل.");
+        }
+
+        function validateStep2() {
+            const inputs = document.querySelectorAll('.task-input');
+            let valid = true;
+            inputs.forEach(input => {
+                const val = input.value.trim();
+                // Professional Validation: Must contain at least 4 words (Action, Object, Result check)
+                if(val.split(' ').length < 4) {
+                    input.classList.add('error-glow');
+                    input.nextElementSibling.classList.remove('hidden');
+                    valid = false;
+                } else {
+                    input.classList.remove('error-glow');
+                    input.nextElementSibling.classList.add('hidden');
+                }
+            });
+
+            if(valid) {
+                setupStep3();
+                goToStep(3);
             }
         }
 
-        function generateFinal() {
-            const title = document.getElementById('input-title').value;
-            const purpose = document.getElementById('input-purpose').value;
-            const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => i.value).filter(v => v !== "");
-            const comp = document.querySelector('input[name="comp-1"]:checked')?.value || "لم يتم التحديد";
+        function setupStep3() {
+            const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => i.value);
+            const zone = document.getElementById('comp-extraction-zone');
+            zone.innerHTML = "";
+            
+            tasks.forEach((task, index) => {
+                const div = document.createElement('div');
+                div.className = "p-5 border rounded-2xl bg-white shadow-sm";
+                div.innerHTML = `
+                    <p class="text-xs text-blue-600 mb-2 font-bold italic">بناءً على المهمة: "${task}"</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold mb-1">ما هي الجدارة المطلوبة؟</label>
+                            <input type="text" class="comp-name w-full p-2 border rounded-lg" placeholder="مثلاً: التفكير التحليلي">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold mb-1">ما هو مستوى الإتقان؟</label>
+                            <select class="comp-level w-full p-2 border rounded-lg bg-slate-50">
+                                <option value="أساسي (تطبيق تحت إشراف)">أساسي</option>
+                                <option value="متوسط (استقلالية في التنفيذ)">متوسط</option>
+                                <option value="متقدم (تطوير وتحسين الممارسات)">متقدم</option>
+                                <option value="خبير (توجيه استراتيجي ورسم سياسات)">خبير</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+                zone.appendChild(div);
+            });
+        }
 
-            document.getElementById('res-title').innerText = title || "مسمى غير محدد";
-            document.getElementById('res-purpose').innerText = purpose || "لم يتم إدخال تحليل للغرض.";
-            document.getElementById('res-tasks').innerHTML = tasks.map(t => `<li>${t}</li>`).join('');
-            document.getElementById('res-comp').innerText = comp;
+        function generateAudit() {
+            const title = document.getElementById('job-title').value;
+            const purpose = document.getElementById('job-purpose').value;
+            const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => i.value);
+            const compNames = Array.from(document.querySelectorAll('.comp-name')).map(i => i.value);
+            const compLevels = Array.from(document.querySelectorAll('.comp-level')).map(i => i.value);
 
-            // Audit Logic (The "Coach" part)
-            const auditBox = document.getElementById('audit-feedback');
+            // Populate Final View
+            document.getElementById('out-title').innerText = title;
+            document.getElementById('out-purpose').innerText = purpose;
+            document.getElementById('out-tasks').innerHTML = tasks.map(t => `<li>${t}</li>`).join('');
+            
+            const compList = document.getElementById('out-comps');
+            compList.innerHTML = compNames.map((name, i) => `
+                <div class="border-b pb-2">
+                    <p class="font-bold text-sm text-slate-800">${name}</p>
+                    <p class="text-[10px] text-blue-600 font-bold uppercase">${compLevels[i]}</p>
+                </div>
+            `).join('');
+
+            // Audit Logic
+            const report = document.getElementById('audit-report');
             let feedback = "";
-            let statusClass = "";
+            let color = "";
 
-            if (purpose.length < 50) {
-                feedback = "⚠️ تنبيه: تحليل 'الغرض' سطحي جداً. المعايير العالمية تتطلب وصف القيمة المضافة وليس فقط المسمى.";
-                statusClass = "bg-yellow-50 border-yellow-200 text-yellow-800";
-            } else if (tasks.length < 3) {
-                feedback = "⚠️ تنبيه: عدد المهام غير كافٍ لتغطية نطاق العمل (Scope). حاول التفكير في الأنشطة الأسبوعية.";
-                statusClass = "bg-yellow-50 border-yellow-200 text-yellow-800";
+            if(compNames.some(n => n.length < 3)) {
+                feedback = "🔴 تدقيق جودة: لقد تجاهلت استنباط بعض الجدارات. هذا يخلق فجوة في عملية التقييم والاختيار مستقبلاً.";
+                color = "bg-red-50 border-red-200 text-red-800";
+            } else if (new Set(compNames).size < compNames.length) {
+                feedback = "🟡 تدقيق جودة: هناك تكرار في الجدارات المستنبطة. الممارس المحترف يحدد 'الجدارة النوعية' لكل مسؤولية.";
+                color = "bg-yellow-50 border-yellow-200 text-yellow-800";
             } else {
-                feedback = "✅ تحليل جيد: لقد قمت ببناء هيكل متماسك. راجع مستويات الجدارة قبل الاعتماد النهائي.";
-                statusClass = "bg-green-50 border-green-200 text-green-800";
+                feedback = "🟢 تدقيق جودة ممتاز: لقد نجحت في ربط المسؤوليات بجدارات مخصصة ومستويات دقيقة. هذا الوصف جاهز للاعتماد.";
+                color = "bg-green-50 border-green-200 text-green-800";
             }
 
-            auditBox.innerHTML = feedback;
-            auditBox.className = `p-4 rounded-xl mb-6 border ${statusClass}`;
+            report.innerHTML = `<p class="font-bold mb-2">تقرير المدرب المهني:</p><p class="text-sm">${feedback}</p>`;
+            report.className = `mb-10 p-6 rounded-2xl border-2 border-dashed ${color}`;
 
-            nextStep(4);
+            goToStep(4);
         }
     </script>
 </body>

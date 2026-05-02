@@ -3,202 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مؤلف الوصف الوظيفي المعياري | HR Job Architect</title>
+    <title>محقق الوصف الوظيفي | Job Analysis Enquirer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; }
-        @media print {
-            .no-print { display: none !important; }
-            body { background-color: white; }
-            .print-container { box-shadow: none !important; border: 1px solid #e2e8f0; border-radius: 0; width: 100%; margin: 0; padding: 20px; }
-            .editable-area { border: none !important; padding: 0 !important; }
-        }
-        .editable-area:focus { outline: 2px dashed #3b82f6; background-color: #fefce8; }
+        body { font-family: 'Tajawal', sans-serif; background-color: #f1f5f9; }
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+        .hint-box { border-right: 4px solid #3b82f6; background-color: #eff6ff; }
+        @media print { .no-print { display: none !important; } .print-area { display: block !important; background: white; p: 0; } }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <div class="max-w-5xl mx-auto">
-        <!-- Header / No Print -->
-        <header class="no-print mb-8 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h1 class="text-2xl font-bold text-slate-800 mb-2">مؤلف الوصف الوظيفي الذكي</h1>
-            <p class="text-slate-600 text-sm italic">أداة معيارية وفق أطر SHRM/CIPD للممارسين الجدد.</p>
+    <div class="max-w-4xl mx-auto">
+        <!-- Wizard Header -->
+        <div class="no-print mb-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h1 class="text-2xl font-bold text-slate-800">مختبر تحليل الوظائف (v2.0)</h1>
+            <p class="text-slate-500 text-sm mt-1">هذه الأداة لن تكتب نيابة عنك؛ بل ستساعدك لتفكر كخبير موارد بشرية.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div class="flex justify-between mt-8 relative">
+                <div class="absolute inset-0 top-1/2 h-0.5 bg-slate-100 -z-10"></div>
+                <div id="step-i-1" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold">1</div>
+                <div id="step-i-2" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">2</div>
+                <div id="step-i-3" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">3</div>
+                <div id="step-i-4" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">4</div>
+            </div>
+        </div>
+
+        <!-- Step 1: Definition -->
+        <section id="step-1" class="step-content active bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold mb-4">1. تعريف الهوية الوظيفية</h2>
+            <div class="hint-box p-4 mb-6">
+                <p class="text-sm text-blue-800"><strong>لماذا نبدأ هنا؟</strong> وفق معايير CIPD، يجب فهم "الغرض الوجودي" للوظيفة قبل كتابة مهامها لتجنب التكرار.</p>
+            </div>
+            
+            <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-semibold mb-2">1. اختر العائلة الوظيفية:</label>
-                    <select id="familySelect" class="w-full p-2 border rounded-lg bg-slate-50 focus:ring-2 focus:ring-blue-500 outline-none">
-                        <option value="">-- اختر --</option>
-                    </select>
+                    <label class="block font-bold text-slate-700 mb-1">المسمى الوظيفي المقترح:</label>
+                    <input type="text" id="input-title" placeholder="مثلاً: أخصائي سعادة الموظفين" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold mb-2">2. اختر المسمى الوظيفي:</label>
-                    <select id="roleSelect" class="w-full p-2 border rounded-lg bg-slate-50 focus:ring-2 focus:ring-blue-500 outline-none" disabled>
-                        <option value="">-- اختر العائلة أولاً --</option>
-                    </select>
+                    <label class="block font-bold text-slate-700 mb-1">ما هي النتيجة النهائية التي تتوقعها الشركة من هذا الموظف؟</label>
+                    <textarea id="input-purpose" rows="3" placeholder="تجنب المسميات، ركز على الأثر..." class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 </div>
             </div>
-            <div class="mt-4 flex justify-end">
-                <button onclick="window.print()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
-                    <span>طباعة / حفظ PDF</span>
-                </button>
+            <div class="mt-8 flex justify-end">
+                <button onclick="nextStep(2)" class="bg-blue-600 text-white px-8 py-2 rounded-xl hover:bg-blue-700 transition">الخطوة التالية</button>
             </div>
-        </header>
+        </section>
 
-        <!-- Document Preview Area -->
-        <main id="documentPreview" class="print-container bg-white p-10 rounded-xl shadow-lg min-h-[1000px] border border-slate-100 relative">
-            <!-- Watermark for Education -->
-            <div class="absolute top-4 left-4 text-[10px] text-slate-400 no-print">إطار عمل معتمد - مخصص للتطوير المهني</div>
-
-            <div class="border-b-2 border-blue-600 pb-4 mb-6 flex justify-between items-end">
-                <div>
-                    <h2 id="view-title" class="text-3xl font-bold text-slate-800 editable-area" contenteditable="true">بطاقة الوصف الوظيفي</h2>
-                    <p class="text-blue-600 font-medium">قسم الموارد البشرية</p>
-                </div>
-                <div class="text-left">
-                    <p class="text-sm text-slate-500">تاريخ الإصدار: <span id="currentDate"></span></p>
-                </div>
+        <!-- Step 2: Tasks Analysis -->
+        <section id="step-2" class="step-content bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold mb-4">2. تحليل الممارسات والمسؤوليات</h2>
+            <div class="hint-box p-4 mb-6 text-sm text-blue-800">
+                <strong>تلميح SHRM:</strong> المهمة هي "فعل" (Action) والمسؤولية هي "التزام" (Obligation). حاول كتابة 3 مهام تبدأ بأفعال مضارعة.
             </div>
-
-            <div class="grid grid-cols-2 gap-6 mb-8 bg-slate-50 p-4 rounded-lg border border-slate-100">
-                <div>
-                    <p class="text-xs text-slate-500 font-bold uppercase">المسمى الوظيفي</p>
-                    <p id="display-job-title" class="font-bold text-slate-700 editable-area" contenteditable="true">-</p>
-                </div>
-                <div>
-                    <p class="text-xs text-slate-500 font-bold uppercase">المرجع المعياري</p>
-                    <p id="display-ref" class="text-slate-700">SHRM / CIPD aligned</p>
-                </div>
+            <div id="tasks-container" class="space-y-3">
+                <input type="text" class="task-input w-full p-3 border rounded-xl" placeholder="المهمة 1...">
+                <input type="text" class="task-input w-full p-3 border rounded-xl" placeholder="المهمة 2...">
+                <input type="text" class="task-input w-full p-3 border rounded-xl" placeholder="المهمة 3...">
             </div>
+            <div class="mt-8 flex justify-between">
+                <button onclick="prevStep(1)" class="text-slate-500 hover:text-slate-800">السابق</button>
+                <button onclick="nextStep(3)" class="bg-blue-600 text-white px-8 py-2 rounded-xl hover:bg-blue-700">الخطوة التالية</button>
+            </div>
+        </section>
 
-            <section class="mb-8">
-                <h3 class="text-lg font-bold text-blue-800 mb-3 border-r-4 border-blue-600 pr-3">الغرض الوظيفي</h3>
-                <div id="display-purpose" class="text-slate-700 leading-relaxed editable-area p-2 rounded" contenteditable="true">
-                    يرجى اختيار وظيفة من القائمة أعلاه للبدء في توليد الوصف الوظيفي المعياري.
-                </div>
-            </section>
-
-            <section class="mb-8">
-                <h3 class="text-lg font-bold text-blue-800 mb-3 border-r-4 border-blue-600 pr-3">المسؤوليات والمهام الأساسية</h3>
-                <ul id="display-tasks" class="list-disc pr-6 space-y-2 text-slate-700 editable-area p-2 rounded" contenteditable="true">
-                    <li>-</li>
-                </ul>
-            </section>
-
-            <section class="mb-8">
-                <h3 class="text-lg font-bold text-blue-800 mb-3 border-r-4 border-blue-600 pr-3">الكفاءات المطلوبة (Competencies)</h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <h4 class="text-sm font-bold text-slate-600 mb-2 italic">الكفاءات السلوكية:</h4>
-                        <ul id="display-soft-skills" class="list-none space-y-1 text-slate-700 text-sm editable-area" contenteditable="true"></ul>
+        <!-- Step 3: Competencies -->
+        <section id="step-3" class="step-content bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold mb-4">3. الجدارات السلوكية (نظام المستويات)</h2>
+            <div class="hint-box p-4 mb-6 text-sm text-blue-800">
+                الممارس المحترف يميز بين مستويات الجدارة. اختر المستوى الذي يتطلبه هذا الدور تحديداً.
+            </div>
+            
+            <div class="space-y-6">
+                <div class="p-4 border rounded-xl bg-slate-50">
+                    <p class="font-bold mb-2">جدارة "حل المشكلات"</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <label class="flex flex-col p-3 border bg-white rounded-lg cursor-pointer hover:border-blue-500 transition">
+                            <input type="radio" name="comp-1" value="مستوى أساسي: يحل المشكلات الروتينية بإشراف" class="mb-2">
+                            <span class="text-xs">أساسي</span>
+                        </label>
+                        <label class="flex flex-col p-3 border bg-white rounded-lg cursor-pointer hover:border-blue-500">
+                            <input type="radio" name="comp-1" value="مستوى متوسط: يحل مشكلات العمل اليومية باستقلالية" class="mb-2">
+                            <span class="text-xs">متوسط</span>
+                        </label>
+                        <label class="flex flex-col p-3 border bg-white rounded-lg cursor-pointer hover:border-blue-500">
+                            <input type="radio" name="comp-1" value="مستوى خبير: يضع استراتيجيات لمنع المشكلات قبل وقوعها" class="mb-2">
+                            <span class="text-xs">خبير</span>
+                        </label>
                     </div>
-                    <div>
-                        <h4 class="text-sm font-bold text-slate-600 mb-2 italic">الكفاءات الفنية:</h4>
-                        <ul id="display-hard-skills" class="list-none space-y-1 text-slate-700 text-sm editable-area" contenteditable="true"></ul>
-                    </div>
                 </div>
-            </section>
-        </main>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+                <button onclick="prevStep(2)" class="text-slate-500 hover:text-slate-800">السابق</button>
+                <button onclick="generateFinal()" class="bg-blue-600 text-white px-8 py-2 rounded-xl hover:bg-blue-700">مراجعة وتحليل المخرج</button>
+            </div>
+        </section>
+
+        <!-- Step 4: Audit & Final Output -->
+        <section id="step-4" class="step-content bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="no-print">
+                <h2 class="text-xl font-bold mb-4">4. مراجعة الجودة والتدقيق المهني</h2>
+                <div id="audit-feedback" class="p-4 rounded-xl mb-6 border">
+                    <!-- Feedback Logic injected here -->
+                </div>
+            </div>
+
+            <div id="final-document" class="print-area p-8 border-2 border-slate-100 rounded-xl bg-white">
+                <div class="border-b-4 border-blue-600 pb-4 mb-6">
+                    <h3 id="res-title" class="text-2xl font-bold text-slate-800 uppercase"></h3>
+                    <p class="text-blue-600 font-bold">مسودة وصف وظيفي تحليلية</p>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="font-bold text-slate-700 underline mb-2">الغرض الوجودي من الوظيفة:</h4>
+                    <p id="res-purpose" class="text-slate-600 italic"></p>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="font-bold text-slate-700 underline mb-2">المسؤوليات المحللة:</h4>
+                    <ul id="res-tasks" class="list-disc pr-6 text-slate-600 space-y-1"></ul>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="font-bold text-slate-700 underline mb-2">مستوى الجدارة المطلوب:</h4>
+                    <p id="res-comp" class="text-slate-600"></p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-between no-print">
+                <button onclick="prevStep(3)" class="text-slate-500 hover:text-slate-800">تعديل التحليل</button>
+                <button onclick="window.print()" class="bg-green-600 text-white px-8 py-2 rounded-xl hover:bg-green-700">اعتماد وطباعة</button>
+            </div>
+        </section>
     </div>
 
     <script>
-        // Data Structure (Deterministic)
-        const hrData = {
-            "استقطاب المواهب": [
-                {
-                    title: "أخصائي استقطاب مواهب",
-                    purpose: "إدارة عملية التوظيف من التخطيط وحتى التعيين، وضمان استقطاب أفضل الكفاءات التي تتماشى مع ثقافة وأهداف المنظمة.",
-                    tasks: [
-                        "تطوير وتنفيذ استراتيجيات مصادر التوظيف (Sourcing).",
-                        "تصميم وإجراء مقابلات مبنية على الكفاءات (Competency-based Interviews).",
-                        "إدارة تجربة المرشح لضمان صورة إيجابية للعلامة التجارية لصاحب العمل.",
-                        "التنسيق مع مديري الإدارات لتحديد الاحتياجات الوظيفية بدقة."
-                    ],
-                    soft: ["الذكاء العاطفي", "القدرة على الإقناع", "التواصل الفعال"],
-                    hard: ["تحليل القوى العاملة", "إدارة نظم تتبع المتقدمين (ATS)", "المقابلة السلوكية"]
-                }
-            ],
-            "علاقات الموظفين": [
-                {
-                    title: "أخصائي علاقات موظفين",
-                    purpose: "تعزيز بيئة عمل إيجابية ومنتجة من خلال إدارة التواصل بين الإدارة والموظفين وضمان الامتثال للقوانين والسياسات.",
-                    tasks: [
-                        "إدارة التظلمات العمالية والتحقيقات الإدارية.",
-                        "تطوير وتحديث سياسات العمل واللوائح الداخلية.",
-                        "الإشراف على برامج رفاهية الموظفين ومبادرات المشاركة (Engagement).",
-                        "تقديم الاستشارات للمديرين حول قضايا الأداء والسلوك."
-                    ],
-                    soft: ["النزاهة", "حل النزاعات", "الاستماع النشط"],
-                    hard: ["قانون العمل السعودي", "صياغة السياسات", "إدارة الأداء"]
-                }
-            ],
-            "التطوير التنظيمي": [
-                {
-                    title: "أخصائي تعلم وتطوير",
-                    purpose: "تحديد الفجوات المهارية وتصميم الحلول التعليمية لتعزيز كفاءة رأس المال البشري ودعم المسار المهني للموظفين.",
-                    tasks: [
-                        "إجراء تحليل احتياجات التدريب (TNA) على مستوى الأفراد والمنظمة.",
-                        "تصميم المناهج التدريبية واختيار طرق التقديم المناسبة.",
-                        "تقييم أثر التدريب باستخدام نموذج (Kirkpatrick) أو ما يعادله.",
-                        "إدارة برامج التعاقب الوظيفي (Succession Planning)."
-                    ],
-                    soft: ["التفكير الاستراتيجي", "التيسير (Facilitation)", "الابتكار"],
-                    hard: ["تصميم الحقائب التدريبية", "تحليل العائد على الاستثمار (ROI)", "منصات التعلم الإلكتروني"]
-                }
-            ]
-        };
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+            updateIndicators(step);
+        }
 
-        const familySelect = document.getElementById('familySelect');
-        const roleSelect = document.getElementById('roleSelect');
-        const currentDate = document.getElementById('currentDate');
+        function prevStep(step) {
+            nextStep(step);
+        }
 
-        // Set Date
-        currentDate.innerText = new Date().toLocaleDateString('ar-SA');
+        function updateIndicators(step) {
+            for(let i=1; i<=4; i++) {
+                const el = document.getElementById('step-i-' + i);
+                if(i < step) { el.classList.replace('bg-slate-200', 'bg-green-500'); el.innerText = '✓'; }
+                else if(i === step) { el.classList.add('bg-blue-600', 'text-white'); el.innerText = i; }
+                else { el.classList.add('bg-slate-200'); el.innerText = i; }
+            }
+        }
 
-        // Initialize Families
-        Object.keys(hrData).forEach(family => {
-            let opt = document.createElement('option');
-            opt.value = family;
-            opt.innerText = family;
-            familySelect.appendChild(opt);
-        });
+        function generateFinal() {
+            const title = document.getElementById('input-title').value;
+            const purpose = document.getElementById('input-purpose').value;
+            const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => i.value).filter(v => v !== "");
+            const comp = document.querySelector('input[name="comp-1"]:checked')?.value || "لم يتم التحديد";
 
-        // Family Change Handler
-        familySelect.onchange = (e) => {
-            const family = e.target.value;
-            roleSelect.innerHTML = '<option value="">-- اختر الوظيفة --</option>';
-            if (family) {
-                roleSelect.disabled = false;
-                hrData[family].forEach((role, index) => {
-                    let opt = document.createElement('option');
-                    opt.value = index;
-                    opt.innerText = role.title;
-                    roleSelect.appendChild(opt);
-                });
+            document.getElementById('res-title').innerText = title || "مسمى غير محدد";
+            document.getElementById('res-purpose').innerText = purpose || "لم يتم إدخال تحليل للغرض.";
+            document.getElementById('res-tasks').innerHTML = tasks.map(t => `<li>${t}</li>`).join('');
+            document.getElementById('res-comp').innerText = comp;
+
+            // Audit Logic (The "Coach" part)
+            const auditBox = document.getElementById('audit-feedback');
+            let feedback = "";
+            let statusClass = "";
+
+            if (purpose.length < 50) {
+                feedback = "⚠️ تنبيه: تحليل 'الغرض' سطحي جداً. المعايير العالمية تتطلب وصف القيمة المضافة وليس فقط المسمى.";
+                statusClass = "bg-yellow-50 border-yellow-200 text-yellow-800";
+            } else if (tasks.length < 3) {
+                feedback = "⚠️ تنبيه: عدد المهام غير كافٍ لتغطية نطاق العمل (Scope). حاول التفكير في الأنشطة الأسبوعية.";
+                statusClass = "bg-yellow-50 border-yellow-200 text-yellow-800";
             } else {
-                roleSelect.disabled = true;
+                feedback = "✅ تحليل جيد: لقد قمت ببناء هيكل متماسك. راجع مستويات الجدارة قبل الاعتماد النهائي.";
+                statusClass = "bg-green-50 border-green-200 text-green-800";
             }
-        };
 
-        // Role Change Handler
-        roleSelect.onchange = (e) => {
-            const family = familySelect.value;
-            const index = e.target.value;
-            if (family && index !== "") {
-                const data = hrData[family][index];
-                document.getElementById('display-job-title').innerText = data.title;
-                document.getElementById('display-purpose').innerText = data.purpose;
-                
-                // Tasks
-                const taskList = document.getElementById('display-tasks');
-                taskList.innerHTML = data.tasks.map(t => `<li>${t}</li>`).join('');
+            auditBox.innerHTML = feedback;
+            auditBox.className = `p-4 rounded-xl mb-6 border ${statusClass}`;
 
-                // Skills
-                document.getElementById('display-soft-skills').innerHTML = data.soft.map(s => `<li>• ${s}</li>`).join('');
-                document.getElementById('display-hard-skills').innerHTML = data.hard.map(h => `<li>• ${h}</li>`).join('');
-            }
-        };
+            nextStep(4);
+        }
     </script>
 </body>
 </html>

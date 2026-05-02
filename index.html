@@ -2,247 +2,247 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>مختبر هندسة الوظائف v2.4 | Professional Job Lab</title>
+    <title>مختبر هندسة الوظائف v2.5 | Professional Job Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Tajawal', sans-serif; background-color: #f1f5f9; color: #1e293b; }
         .step-container { display: none; }
         .step-container.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
         .coach-hint { border-right: 4px solid #10b981; background: #f0fdf4; border-radius: 8px; }
-        .error-field { border: 2px solid #ef4444 !important; }
+        .level-card { transition: all 0.3s ease; border: 2px solid transparent; }
+        .level-card.selected { border-color: #3b82f6; background-color: #eff6ff; }
         @media print { .no-print { display: none !important; } .print-area { display: block !important; border: 2px solid #000; padding: 2rem; } }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-<div class="max-w-5xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden border border-slate-200">
+<div class="max-w-5xl mx-auto bg-white shadow-2xl rounded-3xl border border-slate-200">
     <!-- Header -->
-    <div class="no-print bg-slate-900 p-6 text-white flex justify-between items-center">
+    <div class="no-print bg-slate-900 p-6 text-white flex justify-between items-center rounded-t-3xl">
         <div>
-            <h1 class="text-xl font-bold">مختبر هندسة الوظائف <span class="text-blue-400 text-sm font-mono">v2.4</span></h1>
-            <p class="text-slate-400 text-[10px] mt-1 italic">نظام بناء الممارس المحترف (SHRM/CIPD Aligned)</p>
+            <h1 class="text-xl font-bold italic">JOB ARCHITECT <span class="text-blue-400">v2.5</span></h1>
+            <p class="text-slate-400 text-[10px]">نظام التحليل والمستويات (Job Leveling System)</p>
         </div>
-        <div id="step-tag" class="bg-blue-600 px-4 py-1 rounded-full text-xs font-bold font-mono">1 / 4</div>
+        <div id="step-tag" class="bg-blue-600 px-4 py-1 rounded-full text-xs font-mono">1 / 5</div>
     </div>
 
     <div class="p-6 md:p-10">
         <!-- STEP 1: Context -->
         <div id="step-1" class="step-container active">
-            <h2 class="text-2xl font-black mb-6 border-b pb-2">1. الهوية التنظيمية والغرض</h2>
+            <h2 class="text-2xl font-black mb-6 border-b pb-2">1. الهوية والبيانات المرجعية</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div><label class="block text-xs font-bold mb-1 uppercase text-slate-500 italic">الإدارة / القسم:</label>
-                <input type="text" id="dept" placeholder="مثال: العمليات" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
-                <div><label class="block text-xs font-bold mb-1 uppercase text-slate-500 italic">المسمى الوظيفي:</label>
-                <input type="text" id="title" placeholder="مثال: أخصائي أول" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
-                <div><label class="block text-xs font-bold mb-1 uppercase text-slate-500 italic">كود الوظيفة:</label>
-                <input type="text" id="job-code" placeholder="FIN-ACC-01" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
-                <div><label class="block text-xs font-bold mb-1 uppercase text-slate-500 italic">المرجع (المدير):</label>
-                <input type="text" id="reports" placeholder="المدير التنفيذي" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
-                <div><label class="block text-xs font-bold mb-1 uppercase text-slate-500 italic">تاريخ الوثيقة:</label>
+                <div><label class="block text-xs font-bold mb-1 text-slate-500 uppercase italic">الإدارة / القسم:</label>
+                <input type="text" id="dept" placeholder="الموارد البشرية" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
+                <div><label class="block text-xs font-bold mb-1 text-slate-500 uppercase italic">المسمى الوظيفي:</label>
+                <input type="text" id="title" placeholder="أخصائي أول" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
+                <div><label class="block text-xs font-bold mb-1 text-slate-500 uppercase italic">كود الوظيفة:</label>
+                <input type="text" id="job-code" placeholder="HR-01" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
+                <div><label class="block text-xs font-bold mb-1 text-slate-500 uppercase italic">المرجع الإداري:</label>
+                <input type="text" id="reports" placeholder="مدير القسم" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
+                <div><label class="block text-xs font-bold mb-1 text-slate-500 uppercase italic">تاريخ التحديث:</label>
                 <input type="date" id="doc-date" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"></div>
             </div>
-
-            <div class="mt-10">
-                <h3 class="font-bold mb-2">الغرض الوجودي (The Purpose Statement)</h3>
+            <div class="mt-8">
+                <h3 class="font-bold mb-2">الغرض الوجودي (Purpose Statement)</h3>
                 <div class="coach-hint p-4 mb-4 text-xs text-green-800 leading-relaxed">
-                    <strong>دليل الممارس:</strong> الغرض هو القيمة المضافة النهائية. 
-                    <br>استخدم معادلة: [فعل قوي] + [المجال] + [الهدف الاستراتيجي].
-                    <br><em>مثال: "تعظيم الكفاءة المالية عبر تدقيق الحسابات لضمان الامتثال ومنع الهدر".</em>
+                    <strong>الجانب التعليمي:</strong> الغرض هو "لماذا" وليس "ماذا". ركز على القيمة المضافة النهائية التي تحققها الوظيفة للشركة.
                 </div>
-                <textarea id="purpose" rows="3" class="w-full p-4 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500" placeholder="اكتب الغرض الوجودي هنا..."></textarea>
+                <textarea id="purpose" rows="3" class="w-full p-4 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500" placeholder="مثال: ضمان استدامة الكفاءات عبر تصميم برامج تدريبية ترفع الإنتاجية..."></textarea>
             </div>
             <div class="mt-8 flex justify-end">
-                <button onclick="nav(2)" class="bg-blue-600 text-white px-12 py-3 rounded-xl font-bold hover:shadow-lg transition">الخطوة التالية</button>
+                <button onclick="nav(2)" class="bg-blue-600 text-white px-12 py-3 rounded-xl font-bold transition hover:shadow-lg">بدء تحليل المسؤوليات</button>
             </div>
         </div>
 
-        <!-- STEP 2: Tasks (Refined) -->
+        <!-- STEP 2: Tasks -->
         <div id="step-2" class="step-container">
-            <h2 class="text-2xl font-black mb-2 text-slate-800">2. هندسة المسؤوليات (الالتزامات)</h2>
-            <p class="text-slate-500 text-sm mb-6 underline">يجب ألا يقل عدد المسؤوليات عن 3 لضمان اكتمال نطاق الوصف.</p>
-            
+            <h2 class="text-2xl font-black mb-2">2. هندسة المسؤوليات</h2>
+            <p class="text-slate-500 text-sm mb-6 underline">يجب صياغة 3 مسؤوليات كحد أدنى (فعل + موضوع + نتيجة).</p>
             <div id="tasks-list" class="space-y-4">
-                <div class="task-row flex gap-2 items-start bg-slate-50 p-4 rounded-xl border border-transparent hover:border-slate-300 transition group">
+                <div class="task-row flex gap-2 items-start bg-slate-50 p-4 rounded-xl border group">
                     <div class="flex-1">
-                        <input type="text" class="task-input w-full p-3 border rounded-lg mb-1" placeholder="فعل + موضوع + نتيجة متوقعة...">
-                        <p class="text-[10px] text-red-500 hidden err-msg font-bold">⚠️ صياغة ضعيفة! تذكر (الفعل، الموضوع، النتيجة).</p>
+                        <input type="text" class="task-input w-full p-3 border rounded-lg mb-1 outline-none focus:border-blue-500" placeholder="المسؤولية (فعل + موضوع + نتيجة)...">
                     </div>
-                    <button onclick="removeRow(this)" class="p-2 text-red-400 opacity-0 group-hover:opacity-100 transition">✕ حذف</button>
+                    <button onclick="removeRow(this)" class="p-2 text-red-400 opacity-0 group-hover:opacity-100 transition">✕</button>
                 </div>
             </div>
-            
-            <button onclick="addRow()" class="mt-6 text-blue-600 font-bold text-sm bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100 transition">+ إضافة مسئولية/التزام جديد</button>
-
+            <button onclick="addRow()" class="mt-6 text-blue-600 font-bold text-sm bg-blue-50 px-4 py-2 rounded-lg">+ إضافة مسئولية</button>
             <div class="mt-12 flex justify-between">
                 <button onclick="nav(1)" class="text-slate-400 font-bold">السابق</button>
-                <button onclick="validateStep2()" class="bg-blue-600 text-white px-12 py-3 rounded-xl font-bold">الخطوة التالية</button>
+                <button onclick="validateStep2()" class="bg-blue-600 text-white px-12 py-3 rounded-xl font-bold">تحديد المستوى الوظيفي</button>
             </div>
         </div>
 
-        <!-- STEP 3: Competency Mapping (Dynamic Multi-Entry) -->
+        <!-- STEP 3: Job Leveling (NEW) -->
         <div id="step-3" class="step-container">
-            <h2 class="text-2xl font-black mb-6 text-slate-800">3. استنباط الجدارات (سلوك ومعرفة)</h2>
+            <h2 class="text-2xl font-black mb-6">3. تحديد المستوى الوظيفي (Job Leveling)</h2>
             <div class="coach-hint mb-8 text-xs text-green-800">
-                <strong>المنطق المهني:</strong> المسؤولية الواحدة (التي تظهر أمامك) تتطلب مزيجاً من:
-                <br>1. <strong>الجدارة المعرفية:</strong> (ماذا يعرف؟) مثل القوانين والأدوات.
-                <br>2. <strong>الجدارة السلوكية:</strong> (كيف يتصرف؟) مثل التواصل وحل النزاعات.
+                <strong>لماذا نحدد المستوى الآن؟</strong> بناءً على "ثقل" المسؤوليات التي كتبتَها، يظهر المستوى الحقيقي. هل المهام تنفيذية (Entry) أم استراتيجية (Lead)؟
             </div>
-
-            <div id="comp-lab" class="space-y-10">
-                <!-- Dynamic Task Cards will be injected here -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="level-options">
+                <div class="level-card p-4 rounded-2xl cursor-pointer bg-slate-50 hover:bg-slate-100" onclick="selectLevel('تنفيذي / مساند (Entry)', this)">
+                    <h4 class="font-bold text-slate-800">تنفيذي / مساند (Entry)</h4>
+                    <p class="text-[10px] text-slate-500 mt-1 italic">مهام روتينية، تتطلب إشرافاً مباشراً، نطاق تأثير محدود بالفريق.</p>
+                </div>
+                <div class="level-card p-4 rounded-2xl cursor-pointer bg-slate-50 hover:bg-slate-100" onclick="selectLevel('مهني / تخصصي (Professional)', this)">
+                    <h4 class="font-bold text-slate-800">مهني / تخصصي (Professional)</h4>
+                    <p class="text-[10px] text-slate-500 mt-1 italic">استقلالية في التنفيذ، تخصص عميق، نطاق تأثير على مستوى القسم.</p>
+                </div>
+                <div class="level-card p-4 rounded-2xl cursor-pointer bg-slate-50 hover:bg-slate-100" onclick="selectLevel('إشرافي / تقني أول (Senior/Lead)', this)">
+                    <h4 class="font-bold text-slate-800">إشرافي / تقني أول (Senior/Lead)</h4>
+                    <p class="text-[10px] text-slate-500 mt-1 italic">اتخاذ قرارات فنية، توجيه الآخرين، صياغة إجراءات العمل.</p>
+                </div>
+                <div class="level-card p-4 rounded-2xl cursor-pointer bg-slate-50 hover:bg-slate-100" onclick="selectLevel('قيادي / استراتيجي (Head/Director)', this)">
+                    <h4 class="font-bold text-slate-800">قيادي / استراتيجي (Head/Director)</h4>
+                    <p class="text-[10px] text-slate-500 mt-1 italic">مسؤولية عن ميزانيات، صياغة استراتيجيات، تأثير على المنظمة بالكامل.</p>
+                </div>
             </div>
-
+            <input type="hidden" id="selected-level-val">
             <div class="mt-12 flex justify-between">
                 <button onclick="nav(2)" class="text-slate-400 font-bold">السابق</button>
+                <button onclick="validateStep3()" class="bg-blue-600 text-white px-12 py-3 rounded-xl font-bold">استنباط الجدارات</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: Competencies -->
+        <div id="step-4" class="step-container">
+            <h2 class="text-2xl font-black mb-6">4. استنباط الجدارات النوعية</h2>
+            <div id="comp-lab" class="space-y-8">
+                <!-- Dynamic Content Based on Step 2 Tasks -->
+            </div>
+            <div class="mt-12 flex justify-between">
+                <button onclick="nav(3)" class="text-slate-400 font-bold">السابق</button>
                 <button onclick="generateFinal()" class="bg-slate-900 text-white px-12 py-3 rounded-xl font-bold">توليد البطاقة النهائية</button>
             </div>
         </div>
 
-        <!-- STEP 4: Final Output -->
-        <div id="step-4" class="step-container">
-            <div id="final-print" class="print-area p-10 border-2 border-slate-900 bg-white">
-                <div class="flex justify-between border-b-4 border-slate-900 pb-4 mb-8 uppercase font-black">
-                    <div><h1 id="out-title" class="text-4xl text-slate-900"></h1><p id="out-dept" class="text-lg text-slate-500 font-bold"></p></div>
-                    <div class="text-left text-[10px] space-y-1 font-mono">
-                        <p>Code: <span id="out-code"></span></p>
+        <!-- STEP 5: Final Output -->
+        <div id="step-5" class="step-container">
+            <div id="print-area" class="print-area bg-white text-slate-900 border-2 border-slate-900 p-8">
+                <div class="flex justify-between border-b-4 border-slate-900 pb-4 mb-8 uppercase font-black italic">
+                    <div><h1 id="out-title" class="text-4xl text-slate-900"></h1><p id="out-dept" class="text-lg text-slate-500"></p></div>
+                    <div class="text-left text-[10px] font-mono space-y-1">
+                        <p>ID: <span id="out-code"></span></p>
                         <p>Date: <span id="out-date"></span></p>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mb-10 text-xs">
+                <div class="grid grid-cols-2 gap-4 mb-8 text-sm bg-slate-50 p-4 border">
                     <p><strong>المرجع الإداري:</strong> <span id="out-reports"></span></p>
-                    <p><strong>المستوى:</strong> مهني / تخصصي</p>
+                    <p><strong>المستوى التنظيمي:</strong> <span id="out-level" class="text-blue-700 font-black"></span></p>
                 </div>
-                <div class="mb-10">
+                <div class="mb-8">
                     <h4 class="font-black border-r-8 border-slate-900 pr-3 mb-2 uppercase">الغرض الاستراتيجي</h4>
-                    <p id="out-purpose" class="leading-relaxed text-slate-700 italic"></p>
+                    <p id="out-purpose" class="italic text-slate-700 leading-relaxed"></p>
                 </div>
-                <div class="mb-10">
+                <div class="mb-8">
                     <h4 class="font-black border-r-8 border-slate-900 pr-3 mb-3 uppercase">المسؤوليات والالتزامات</h4>
                     <ul id="out-tasks" class="list-decimal pr-8 space-y-2 font-medium"></ul>
                 </div>
                 <div class="grid grid-cols-2 gap-10">
-                    <div><h4 class="font-black border-b-2 border-blue-600 mb-3 pb-1">الجدارات السلوكية</h4><ul id="out-soft" class="text-xs space-y-2 pr-4 list-disc"></ul></div>
-                    <div><h4 class="font-black border-b-2 border-green-600 mb-3 pb-1">الجدارات المعرفية</h4><ul id="out-hard" class="text-xs space-y-2 pr-4 list-disc"></ul></div>
+                    <div><h4 class="font-black border-b-2 border-blue-600 mb-3 pb-1">الجدارات السلوكية</h4><ul id="out-soft" class="text-xs space-y-1 pr-4 list-disc"></ul></div>
+                    <div><h4 class="font-black border-b-2 border-green-600 mb-3 pb-1">الجدارات المعرفية</h4><ul id="out-hard" class="text-xs space-y-1 pr-4 list-disc"></ul></div>
                 </div>
             </div>
             <div class="no-print mt-12 flex justify-between items-center">
-                <button onclick="nav(3)" class="text-slate-400 font-bold underline">إعادة التحليل</button>
-                <button onclick="window.print()" class="bg-blue-600 text-white px-16 py-4 rounded-full font-black shadow-xl hover:bg-blue-700 transition">طباعة البطاقة المعتمدة</button>
+                <button onclick="nav(4)" class="text-slate-400 font-bold underline">إعادة التحليل</button>
+                <button onclick="window.print()" class="bg-blue-600 text-white px-16 py-4 rounded-full font-black shadow-xl hover:bg-blue-700 transition">اعتماد وطباعة PDF</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    let currentStep = 1;
-
     function nav(s) {
         document.querySelectorAll('.step-container').forEach(c => c.classList.remove('active'));
         document.getElementById('step-' + s).classList.add('active');
-        document.getElementById('step-tag').innerText = s + ' / 4';
+        document.getElementById('step-tag').innerText = s + ' / 5';
         window.scrollTo(0,0);
     }
 
     function addRow() {
         const div = document.createElement('div');
-        div.className = "task-row flex gap-2 items-start bg-slate-50 p-4 rounded-xl border border-transparent hover:border-slate-300 transition group";
-        div.innerHTML = `<div class="flex-1">
-                            <input type="text" class="task-input w-full p-3 border rounded-lg mb-1 outline-none" placeholder="اكتب مسؤولية احترافية أخرى...">
-                            <p class="text-[10px] text-red-500 hidden err-msg font-bold italic">⚠️ صياغة غير مكتملة! تذكر (الفعل، الموضوع، النتيجة).</p>
-                         </div>
+        div.className = "task-row flex gap-2 items-start bg-slate-50 p-4 rounded-xl border group";
+        div.innerHTML = `<div class="flex-1"><input type="text" class="task-input w-full p-3 border rounded-lg mb-1 outline-none" placeholder="المسؤولية..."></div>
                          <button onclick="removeRow(this)" class="p-2 text-red-400">✕</button>`;
         document.getElementById('tasks-list').appendChild(div);
     }
 
     function removeRow(btn) {
         if(document.querySelectorAll('.task-row').length > 1) btn.closest('.task-row').remove();
-        else alert("يجب الحفاظ على مسؤولية واحدة على الأقل قبل الانتقال للخطوة التالية.");
     }
 
     function validateStep2() {
-        const inputs = document.querySelectorAll('.task-input');
-        if(inputs.length < 3) { alert("تنبيه مهني: يجب إضافة 3 مسؤوليات على الأقل وفق معايير الجودة."); return; }
-        
-        let valid = true;
-        inputs.forEach(i => {
-            if(i.value.trim().split(' ').length < 4) {
-                i.classList.add('error-field');
-                i.nextElementSibling.classList.remove('hidden');
-                valid = false;
-            } else {
-                i.classList.remove('error-field');
-                i.nextElementSibling.classList.add('hidden');
-            }
-        });
-        if(valid) { buildCompLab(); nav(3); }
+        const inputs = Array.from(document.querySelectorAll('.task-input'));
+        if(inputs.length < 3) { alert("يجب كتابة 3 مسؤوليات على الأقل."); return; }
+        if(inputs.some(i => i.value.trim().length < 10)) { alert("يرجى كتابة مسؤوليات واضحة وكاملة."); return; }
+        nav(3);
+    }
+
+    function selectLevel(val, el) {
+        document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        document.getElementById('selected-level-val').value = val;
+    }
+
+    function validateStep3() {
+        if(!document.getElementById('selected-level-val').value) { alert("يجب اختيار المستوى التنظيمي بناءً على ثقل المهام."); return; }
+        buildCompLab();
+        nav(4);
     }
 
     function buildCompLab() {
         const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => i.value);
         const lab = document.getElementById('comp-lab');
-        lab.innerHTML = "";
+        lab.innerHTML = `<div class="coach-hint p-4 mb-6 text-xs text-green-800">انظر للمسؤولية واستنبط الجدارات (ماذا يعرف؟ / كيف يتصرف؟) اللازمة لإنجازها.</div>`;
         
         tasks.forEach((task, idx) => {
             const card = document.createElement('div');
             card.className = "p-6 bg-slate-50 border rounded-2xl shadow-sm";
             card.innerHTML = `
-                <div class="mb-4 text-blue-600 font-bold border-b-2 border-blue-100 pb-2 flex justify-between">
-                    <span>المسؤولية الحالية: "${task}"</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="space-y-3">
-                        <label class="text-[10px] font-black text-slate-400 uppercase italic">الجدارات السلوكية (Behavioral)</label>
-                        <div id="soft-list-${idx}" class="space-y-2">
-                            <input type="text" class="soft-input-${idx} w-full p-2 border rounded-lg text-xs" placeholder="مثلاً: الذكاء العاطفي">
-                        </div>
-                        <button onclick="addCompInput('soft', ${idx})" class="text-[10px] text-blue-500 font-bold">+ جدارة سلوكية أخرى</button>
+                <div class="mb-4 text-blue-600 font-bold border-b pb-2 italic text-sm">المسؤولية: "${task}"</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-[10px] font-black text-slate-400 uppercase">الجدارات السلوكية</label>
+                        <div id="soft-list-${idx}" class="space-y-2 mt-2"><input type="text" class="soft-in-${idx} w-full p-2 border rounded-lg text-xs" placeholder="مثال: التواصل الفعال"></div>
+                        <button onclick="addCompIn('soft', ${idx})" class="text-[10px] text-blue-500 font-bold mt-2">+ جدارة إضافية</button>
                     </div>
-                    <div class="space-y-3">
-                        <label class="text-[10px] font-black text-slate-400 uppercase italic">الجدارات المعرفية (Technical)</label>
-                        <div id="hard-list-${idx}" class="space-y-2">
-                            <input type="text" class="hard-input-${idx} w-full p-2 border rounded-lg text-xs" placeholder="مثلاً: قانون العمل">
-                        </div>
-                        <button onclick="addCompInput('hard', ${idx})" class="text-[10px] text-green-500 font-bold">+ معرفة فنية أخرى</button>
+                    <div>
+                        <label class="text-[10px] font-black text-slate-400 uppercase">الجدارات المعرفية</label>
+                        <div id="hard-list-${idx}" class="space-y-2 mt-2"><input type="text" class="hard-in-${idx} w-full p-2 border rounded-lg text-xs" placeholder="مثال: إجادة الـ Excel"></div>
+                        <button onclick="addCompIn('hard', ${idx})" class="text-[10px] text-green-500 font-bold mt-2">+ معرفة إضافية</button>
                     </div>
                 </div>`;
             lab.appendChild(card);
         });
     }
 
-    function addCompInput(type, idx) {
-        const list = document.getElementById(`${type}-list-${idx}`);
+    function addCompIn(type, idx) {
         const input = document.createElement('input');
-        input.type = "text";
-        input.className = `${type}-input-${idx} w-full p-2 border rounded-lg text-xs`;
-        input.placeholder = "إضافة جدارة إضافية...";
-        list.appendChild(input);
+        input.className = `${type}-in-${idx} w-full p-2 border rounded-lg text-xs mt-2`;
+        input.placeholder = "إضافة...";
+        document.getElementById(`${type}-list-${idx}`).appendChild(input);
     }
 
     function generateFinal() {
         ['title', 'dept', 'job-code', 'reports', 'purpose'].forEach(id => {
-            const val = document.getElementById(id).value;
-            document.getElementById('out-' + (id==='job-code'?'code':id)).innerText = val;
+            document.getElementById('out-' + (id==='job-code'?'code':id)).innerText = document.getElementById(id).value;
         });
+        document.getElementById('out-level').innerText = document.getElementById('selected-level-val').value;
         document.getElementById('out-date').innerText = document.getElementById('doc-date').value || new Date().toLocaleDateString('ar-EG');
+        document.getElementById('out-tasks').innerHTML = Array.from(document.querySelectorAll('.task-input')).map(i => `<li>${i.value}</li>`).join('');
 
-        const tasks = Array.from(document.querySelectorAll('.task-input')).map(i => `<li>${i.value}</li>`).join('');
-        document.getElementById('out-tasks').innerHTML = tasks;
-
-        // Collecting Competencies from all cards
         let softs = [], hards = [];
-        const taskCount = document.querySelectorAll('.task-input').length;
-        for(let i=0; i<taskCount; i++) {
-            softs.push(...Array.from(document.querySelectorAll(`.soft-input-${i}`)).map(v => v.value));
-            hards.push(...Array.from(document.querySelectorAll(`.hard-input-${i}`)).map(v => v.value));
+        for(let i=0; i<document.querySelectorAll('.task-input').length; i++) {
+            softs.push(...Array.from(document.querySelectorAll(`.soft-in-${i}`)).map(v => v.value));
+            hards.push(...Array.from(document.querySelectorAll(`.hard-in-${i}`)).map(v => v.value));
         }
 
-        const renderList = (arr) => [...new Set(arr)].filter(v => v.trim()).map(v => `<li>${v}</li>`).join('');
-        document.getElementById('out-soft').innerHTML = renderList(softs) || "<li>لم يتم التحديد</li>";
-        document.getElementById('out-hard').innerHTML = renderList(hards) || "<li>لم يتم التحديد</li>";
-
-        nav(4);
+        const render = (arr) => [...new Set(arr)].filter(v => v.trim()).map(v => `<li>${v}</li>`).join('');
+        document.getElementById('out-soft').innerHTML = render(softs) || "<li>لم يتم التحديد</li>";
+        document.getElementById('out-hard').innerHTML = render(hards) || "<li>لم يتم التحديد</li>";
+        nav(5);
     }
 </script>
 </body>
